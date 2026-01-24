@@ -1,6 +1,14 @@
 # 📚 Indexa - Frontend
 
-Una aplicación web moderna y eficiente para indexar y gestionar los temarios de tus libros físicos, facilitando la búsqueda y organización de contenido.
+> **Una aplicación web moderna y eficiente para indexar y gestionar los temarios de tus libros físicos, facilitando la búsqueda y organización de contenido.**
+
+[![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)](https://developer.mozilla.org/es/docs/Web/HTML)
+[![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
+[![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)](https://developer.mozilla.org/es/docs/Web/JavaScript)
+[![Prettier](https://img.shields.io/badge/prettier-192a32?style=for-the-badge&logo=prettier&logoColor=dc524a)](https://prettier.io/)
+[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
+[![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
 
 ## 🎯 Descripción
 
@@ -19,14 +27,6 @@ Este repositorio contiene el **cliente front-end** construido con HTML, CSS y Ja
 - ⚡ **Interfaz Rápida**: JavaScript vanilla para una experiencia fluida
 - 🔐 **API REST**: Comunicación segura con el backend
 
-## 🏗️ Arquitectura
-
-Este proyecto sigue una arquitectura **cliente-servidor** separada en dos repositorios:
-
-- **Frontend** (este repositorio): Interfaz de usuario en HTML/CSS/JS
-- **Backend** ([indexa-api](https://github.com/kitorosano/indexa-api)): API REST en Node.js
-- **Base de Datos**: MySQL para persistencia de datos
-
 ## 🛠️ Tecnologías Frontend
 
 - **HTML5**: Estructura semántica y moderna
@@ -40,6 +40,32 @@ Este proyecto sigue una arquitectura **cliente-servidor** separada en dos reposi
 - **Backend**: Node.js + Express.js
 - **Base de Datos**: MySQL
 - **API**: RESTful
+
+## 🏗️ Arquitectura
+
+Este proyecto sigue una arquitectura **cliente-servidor** separada en dos repositorios:
+
+- **Frontend** (este repositorio): Interfaz de usuario en HTML/CSS/JS
+- **Backend** ([indexa-api](https://github.com/kitorosano/indexa-api)): API REST en Node.js
+
+```
+indexa-web/
+├── assets/
+│   └── images/        # Recursos gráficos
+│       └── ...
+├── css/               # Archivos CSS
+│   └── ...
+├── html/              # Archivos HTML
+│   └── ...
+├── js/                # Archivos JavaScript
+│   └── ...
+├── .env               # Variables de entorno (no incluido en el repositorio)
+├── .env.example       # Variables de entorno de ejemplo
+├── .gitignore         # Archivos y carpetas ignorados por Git
+├── index.html         # Página principal
+├── LICENSE            # Licencia del proyecto
+└── README.md          # Documentación del proyecto
+```
 
 ## 🚀 Instalación y Configuración
 
@@ -70,7 +96,7 @@ Este proyecto sigue una arquitectura **cliente-servidor** separada en dos reposi
    API_URL=
    ```
 
-3. **Inicia un servidor local** (opcional)
+3. **Inicia un servidor local**
 
    ```bash
    # Con Node.js
@@ -86,36 +112,15 @@ Este proyecto sigue una arquitectura **cliente-servidor** separada en dos reposi
 
 > **Nota**: Asegúrate de tener el backend corriendo antes de usar la aplicación. Consulta el repositorio [indexa-api](https://github.com/kitorosano/indexa-api) para instrucciones de instalación del backend.
 
-## 📁 Estructura del Proyecto
-
-```
-indexa-web/
-├── assets/
-│   └── images/        # Recursos gráficos
-│       └── ...
-├── css/               # Archivos CSS
-│   └── ...
-├── html/              # Archivos HTML
-│   └── ...
-├── js/                # Archivos JavaScript
-│   └── ...
-├── .env               # Variables de entorno (no incluido en el repositorio)
-├── .env.example       # Variables de entorno de ejemplo
-├── .gitignore         # Archivos y carpetas ignorados por Git
-├── index.html         # Página principal
-├── LICENSE            # Licencia del proyecto
-└── README.md          # Documentación del proyecto
-```
-
 ## 🔗 Repositorios Relacionados
 
 - **Backend API**: [indexa-api](https://github.com/kitorosano/indexa-api) - API REST en Node.js con MySQL
 
 ## 📄 Licencia
 
-Este proyecto está bajo la Licencia MIT.
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-## 👨‍💻 Autores
+## 👤 Autores
 
 **kitorosano**
 
