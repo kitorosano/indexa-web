@@ -1,0 +1,117 @@
+aside{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+    width: 20%; /* TODO: cambiar a segun el ancho total */
+    background-color: white;
+    border-right: 1px solid #e0e0e0;
+}
+
+svg{
+    stroke: #4c74e4;
+}
+
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 10px;
+}
+
+#mainTitle{
+    color: #4c74e4;
+}
+
+hr{
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    width: 100%;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    gap: 10px;
+}
+
+li{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 10px;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+li:hover{
+    background-color: #F0F6FF;
+    cursor: pointer;
+    color: #4c74e4;
+}
+
+.topSider{
+    margin-inline: 20px;
+}
+
+.userContainer{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border: none;
+    border-top:  1px solid #e0e0e0;
+    padding-inline: 20px;
+    padding-block: 10px;
+    transition: 0.2s;
+}
+
+.userContainer:hover{
+    background-color: #F0F6FF;
+    cursor: pointer;
+    color: #4c74e4;
+}
+.userContainer:hover .userData #userDataName{
+    color: #4c74e4;
+}
+
+.userIcon{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden; /* para asegurarnos de que la imagen no se salga del contenedor redondo */
+}
+
+.userIcon img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.userData{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+#userDataName{
+    color: black;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    transition: 0.2s;
+}
+
+#userDataEmail{
+    color: grey;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+    transition: 0.2s
+}
