@@ -35,6 +35,7 @@ $LOGIN_FORM.addEventListener("submit", async (evento) => {
     $MESSAGE_CONTAINER.textContent = error.message;
     $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
     $PASSWORD_INPUT.value = "";
+    validar();
   } finally {
     // TODO: quitar spinner de carga
   }
