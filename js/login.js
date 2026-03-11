@@ -1,41 +1,41 @@
-let users = [
-  {
-    email: "prueba@gmail.com",
-    password: "123456"
-  }
-]; 
-
-const $LOGIN_FORM = document.getElementById('loginForm');
-const $EMAIL_INPUT = document.getElementById('email');
-const $PASSWORD_INPUT = document.getElementById('password');
-const $BTN = $LOGIN_FORM.querySelector('button');
+const $LOGIN_FORM = document.getElementById("loginForm");
+const $EMAIL_INPUT = document.getElementById("email");
+const $PASSWORD_INPUT = document.getElementById("password");
+const $BTN = $LOGIN_FORM.querySelector("button");
+const $MESSAGE_CONTAINER = document.getElementById("messageContainer");
 
 const validar = () => {
-    $BTN.disabled = !$EMAIL_INPUT.value.trim() || !$PASSWORD_INPUT.value.trim();
+  $BTN.disabled = !$EMAIL_INPUT.value.trim() || !$PASSWORD_INPUT.value.trim();
 };
-
-$EMAIL_INPUT.addEventListener('input', validar);
-$PASSWORD_INPUT.addEventListener('input', validar);
-
-
 validar();
 
-const $MESSAGE_CONTAINER = document.getElementById('messageContainer');
+$EMAIL_INPUT.addEventListener("input", validar);
+$PASSWORD_INPUT.addEventListener("input", validar);
 
-    $LOGIN_FORM.addEventListener('submit', (evento) => {
-    evento.preventDefault();
+$LOGIN_FORM.addEventListener("submit", async (evento) => {
+  evento.preventDefault();
 
-    const emailValue = $EMAIL_INPUT.value;
-    const passwordValue = $PASSWORD_INPUT.value;
+  const emailValue = $EMAIL_INPUT.value.trim();
+  const passwordValue = $PASSWORD_INPUT.value.trim();
 
-    const userEncontrado = users.find(u => u.email === emailValue && u.password === passwordValue);
+  if (!emailValue || !passwordValue) return;
 
-    if (userEncontrado) {
-        $MESSAGE_CONTAINER.innerHTML = `<h4>¡Bienvenido ${userEncontrado.email}!</h4>`;
-    } else {
-        $MESSAGE_CONTAINER.innerHTML = `<h4>Credenciales incorrectas</h4>`;
-    }
+  const body = {
+    email: emailValue,
+    password: passwordValue,
+  };
 
-    $LOGIN_FORM.reset();
-    validar();
+  try {
+    // TODO: agregar spinner de carga mientras se espera la respuesta
+
+    await POST("/auth", body);
+
+    window.location.href = "../index.html";
+  } catch (error) {
+    $MESSAGE_CONTAINER.textContent = error.message;
+    $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
+    $PASSWORD_INPUT.value = "";
+  } finally {
+    // TODO: quitar spinner de carga
+  }
 });
