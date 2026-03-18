@@ -30,7 +30,7 @@ $LOGIN_FORM.addEventListener("submit", async (evento) => {
 
     await POST("/auth", body);
 
-    window.location.href = "../index.html";
+    window.location.href = "index.html";
   } catch (error) {
     $MESSAGE_CONTAINER.textContent = error.message;
     $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
