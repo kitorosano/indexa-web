@@ -75,3 +75,35 @@ const getRefreshToken = async function () {
     throw error;
   }
 };
+
+const DELETE = async function (endpoint) {
+  try {
+    const authToken = localStorage.getItem("token");
+
+    const response = await fetch(API_URL + endpoint, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        ...(authToken && {
+          Authorization: `Bearer ${authToken}`,
+        }),
+      },
+    });
+
+    let responseData = null;
+
+    try {
+      responseData = await response.json();
+    } catch {
+      responseData = null;
+    }
+
+    if (!response.ok) {
+      throw new Error(responseData?.message || `HTTP ${response.status}`);
+    }
+
+    return responseData;
+  } catch (error) {
+    throw error;
+  }
+};
