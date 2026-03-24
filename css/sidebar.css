@@ -2,25 +2,71 @@ aside{
     display: flex;
     flex-direction: column;
     height: 100vh;
+    width: 80px;
     justify-content: space-between;
-    width: 20%; /* TODO: cambiar a segun el ancho total */
     background-color: white;
     border-right: 1px solid #e0e0e0;
+    transition: 0.2s;
+}
+
+aside:hover{
+    width: 260px; 
+}
+
+.topSider{
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
 }
 
 svg{
     stroke: #4c74e4;
+    width: 24px;
+    height: 24px;
 }
 
 .title{
+    margin: 0;
+    padding: 0;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     gap: 10px;
+}
+
+aside:hover .title{
+    justify-content: left;
+}
+
+.title svg {
+    width: 32px;
+    height: 32px;
 }
 
 #mainTitle{
     color: #4c74e4;
+    font-size: 0.01px;
+    width: 0px;
+    transition: 0.2s;
+}
+
+aside:hover #mainTitle{
+    font-size: 24px;
+}
+
+aside p{
+    margin: 0px;
+    font-size: 0.01px;
+    padding: 0px;
+    width: 0px;
+    transition: 0.2s;
+}
+
+aside:hover p{
+    font-size: 16px;
+    width: 100px;
 }
 
 hr{
@@ -30,24 +76,30 @@ hr{
 }
 
 ul{
-    list-style-type: none;
-    padding: 0px;
     display: flex;
     flex-direction: column;
     align-items: left;
     justify-content: center;
+    width: 100%;
+    list-style-type: none;
+    padding: 0px 10px;
     gap: 10px;
 }
 
 li{
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: left;
     border-radius: 10px;
     gap: 10px;
-    padding: 10px;
+    padding: 10px 0 10px;
     transition: 0.2s;
     font-weight: 500;
+}
+
+aside:hover li{
+    justify-content: left;
 }
 
 li:hover{
@@ -56,9 +108,10 @@ li:hover{
     color: #4c74e4;
 }
 
-.topSider{
-    margin-inline: 20px;
+.title{
+    margin-block: 10px;
 }
+
 
 .userContainer{
     display: flex;
@@ -84,8 +137,12 @@ li:hover{
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    overflow: hidden; /* para asegurarnos de que la imagen no se salga del contenedor redondo */
+    overflow: hidden;
+    min-width: 40px;
+    min-height: 40px;
+    flex-shrink: 0;
 }
+
 
 .userIcon img{
     width: 100%;
@@ -97,21 +154,28 @@ li:hover{
     display: flex;
     flex-direction: column;
     margin: 20px;
+    transition: 0.2s;
 }
 
 #userDataName{
     color: black;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 0.01px;
     padding: 0px;
     margin: 0px;
     transition: 0.2s;
 }
+aside:hover #userDataName{
+    font-size: 15px;
+}
 
 #userDataEmail{
     color: grey;
-    font-size: 12px;
+    font-size: 0.01px;
     padding: 0px;
     margin: 0px;
     transition: 0.2s
+}
+aside:hover #userDataEmail{
+    font-size: 12px;
 }
