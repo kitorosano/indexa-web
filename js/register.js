@@ -20,6 +20,11 @@ $EMAIL_INPUT.addEventListener("input", validar);
 $PASSWORD_INPUT.addEventListener("input", validar);
 $CONFIRM_PASSWORD_INPUT.addEventListener("input", validar);
 
+const displayMessage = (message, type) => {
+  $MESSAGE_CONTAINER.textContent = message;
+  $MESSAGE_CONTAINER.className = type;
+};
+
 $REGISTER_FORM.addEventListener("submit", async (evento) => {
   evento.preventDefault();
 
@@ -32,18 +37,17 @@ $REGISTER_FORM.addEventListener("submit", async (evento) => {
     return;
 
   if (passwordValue !== confirmPasswordValue) {
-    $MESSAGE_CONTAINER.textContent = "Las contraseñas no coinciden";
-    $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
+    displayMessage("Las contraseñas no coinciden", "error");
     $BTN.disabled = true;
     return;
   }
 
   const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$/;
-
   if (!nameRegex.test(nameValue)) {
-    $MESSAGE_CONTAINER.textContent =
-      "Formato de nombre inválido. No se permiten números ni símbolos";
-    $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
+    displayMessage(
+      "Formato de nombre inválido. No se permiten números ni símbolos",
+      "error",
+    );
     $BTN.disabled = true;
     return;
   }
@@ -55,23 +59,49 @@ $REGISTER_FORM.addEventListener("submit", async (evento) => {
   };
 
   try {
-    // TODO: agregar spinner de carga mientras se espera la respuesta
+    showLoading();
 
     const response = await POST("/users", body);
-
-    // TODO: quitar spinner de carga
-    $MESSAGE_CONTAINER.textContent = response.message + ". Redirigiendo a login...";
-    $MESSAGE_CONTAINER.style.color = "green"; // TODO: agregar clase CSS para mensajes de éxito
     $REGISTER_FORM.reset();
+
+    displayMessage(response.message + ". Redirigiendo...", "success");
 
     // Redirigir a la página de login después de un breve retraso para mostrar el mensaje de éxito
     setTimeout(() => {
       window.location.href = "login.html";
     }, 2000);
   } catch (error) {
-    $MESSAGE_CONTAINER.textContent = error.message;
-    $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
-    $PASSWORD_INPUT.value = "";
+    displayMessage(error.message, "error");
+
+    $CONFIRM_PASSWORD_INPUT.value = "";
     validar();
+  } finally {
+    hideLoading();
   }
 });
+
+// ========= Lógica para mostrar/ocultar contraseña ========= //
+
+const $SHOW_PASSWORD_ICON = document.getElementById("showPasswordIcon");
+const $SHOW_CONFIRM_PASSWORD_ICON = document.getElementById(
+  "showConfirmPasswordIcon",
+);
+const openEye_SVG = `<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>`;
+const closeEye_SVG = `<path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/>`;
+let passwordsAreVisible = false;
+
+const togglePasswordVisibility = () => {
+  passwordsAreVisible = !passwordsAreVisible;
+  $PASSWORD_INPUT.type = passwordsAreVisible ? "text" : "password";
+  $CONFIRM_PASSWORD_INPUT.type = passwordsAreVisible ? "text" : "password";
+
+  $SHOW_PASSWORD_ICON.innerHTML = passwordsAreVisible
+    ? closeEye_SVG
+    : openEye_SVG;
+  $SHOW_CONFIRM_PASSWORD_ICON.innerHTML = passwordsAreVisible
+    ? closeEye_SVG
+    : openEye_SVG;
+};
+
+$SHOW_PASSWORD_ICON.addEventListener("click", togglePasswordVisibility);
+$SHOW_CONFIRM_PASSWORD_ICON.addEventListener("click", togglePasswordVisibility);
