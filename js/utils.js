@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:4000"; // TODO: Read from .env file
+const API_URL = "http://127.0.0.1:4000"; // TODO: Read from .env file
 
 const GET = async function (endpoint, { withAuthorization = false } = {}) {
   try {
