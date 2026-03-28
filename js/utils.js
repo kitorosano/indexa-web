@@ -145,8 +145,9 @@ const getSessionToken = async function () {
 
     return responseData.accessToken;
   } catch (error) {
+    // Si hay un error (como un token inválido o expirado), eliminar el userId de localStorage y redirigir al login
     localStorage.removeItem("userId");
-    window.location.href = "/html/login.html";
+    window.location.href = "login.html";
     throw error;
   }
 };
