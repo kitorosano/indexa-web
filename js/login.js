@@ -12,8 +12,14 @@ validar();
 $EMAIL_INPUT.addEventListener("input", validar);
 $PASSWORD_INPUT.addEventListener("input", validar);
 
+const displayMessage = (message, type) => {
+  $MESSAGE_CONTAINER.textContent = message;
+  $MESSAGE_CONTAINER.className = type;
+};
+
 $LOGIN_FORM.addEventListener("submit", async (evento) => {
   evento.preventDefault();
+  displayMessage("", ""); // Limpiar mensajes anteriores
 
   const emailValue = $EMAIL_INPUT.value.trim();
   const passwordValue = $PASSWORD_INPUT.value.trim();
@@ -26,17 +32,35 @@ $LOGIN_FORM.addEventListener("submit", async (evento) => {
   };
 
   try {
-    // TODO: agregar spinner de carga mientras se espera la respuesta
+    showLoading();
 
-    await POST("/auth", body);
+    const responseData = await POST("/auth", body, { withAuthorization: false });
+
+    // Extraer el userId del token JWT y almacenarlo en localStorage
+    const encryptedToken = responseData.accessToken.split(".")[1];
+    const decryptedToken = JSON.parse(atob(encryptedToken));
+    localStorage.setItem("userId", decryptedToken.id);
 
     window.location.href = "../index.html";
   } catch (error) {
-    $MESSAGE_CONTAINER.textContent = error.message;
-    $MESSAGE_CONTAINER.style.color = "red"; // TODO: agregar clase CSS para mensajes de error
+    displayMessage(error.message, "error");
     $PASSWORD_INPUT.value = "";
     validar();
   } finally {
-    // TODO: quitar spinner de carga
+    hideLoading();
   }
+});
+
+// ========= Lógica para mostrar/ocultar contraseña ========= //
+
+const $SHOW_PASSWORD_ICON = document.getElementById("showPasswordIcon");
+const openEye_SVG = `<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>`;
+const closeEye_SVG = `<path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/>`;
+
+$SHOW_PASSWORD_ICON.addEventListener("click", () => {
+  $PASSWORD_INPUT.type =
+    $PASSWORD_INPUT.type === "password" ? "text" : "password";
+
+  $SHOW_PASSWORD_ICON.innerHTML =
+    $PASSWORD_INPUT.type === "password" ? openEye_SVG : closeEye_SVG;
 });

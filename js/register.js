@@ -27,6 +27,7 @@ const displayMessage = (message, type) => {
 
 $REGISTER_FORM.addEventListener("submit", async (evento) => {
   evento.preventDefault();
+  displayMessage("", ""); // Limpiar mensajes anteriores
 
   const nameValue = $NAME_INPUT.value.trim();
   const emailValue = $EMAIL_INPUT.value.trim();
@@ -61,7 +62,7 @@ $REGISTER_FORM.addEventListener("submit", async (evento) => {
   try {
     showLoading();
 
-    const response = await POST("/users", body);
+    const response = await POST("/users", body, { withAuthorization: false });
     $REGISTER_FORM.reset();
 
     displayMessage(response.message + ". Redirigiendo...", "success");
