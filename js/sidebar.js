@@ -21,6 +21,7 @@ document.getElementById("settingsButton").onclick = function () {
 document.querySelector(".userContainer").onclick = async function () {
   try {
     await DELETE("/auth");
+    localStorage.removeItem("userId");
     window.location.href = "/html/login.html";
   } catch (error) {
     console.error("Error al cerrar sesión:", error.message);
