@@ -41,7 +41,7 @@ $LOGIN_FORM.addEventListener("submit", async (evento) => {
     const decryptedToken = JSON.parse(atob(encryptedToken));
     localStorage.setItem("userId", decryptedToken.id);
 
-    window.location.href = "../index.html";
+    window.location.href = "/";
   } catch (error) {
     displayMessage(error.message, "error");
     $PASSWORD_INPUT.value = "";
